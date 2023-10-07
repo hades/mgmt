@@ -289,6 +289,10 @@ func (obj *StmtBind) Unify() ([]interfaces.Invariant, error) {
 	return obj.Value.Unify()
 }
 
+func (obj *StmtBind) TimeCheck() error {
+	return nil
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -584,6 +588,10 @@ func (obj *StmtRes) Unify() ([]interfaces.Invariant, error) {
 	}
 
 	return invariants, nil
+}
+
+func (obj *StmtRes) TimeCheck() error {
+	panic("TODO")
 }
 
 // Graph returns the reactive function graph which is expressed by this node. It
@@ -1146,6 +1154,7 @@ type StmtResContents interface {
 	Ordering(map[string]interfaces.Node) (*pgraph.Graph, map[interfaces.Node]string, error)
 	SetScope(*interfaces.Scope) error
 	Unify(kind string) ([]interfaces.Invariant, error) // different!
+	TimeCheck() error
 	Graph() (*pgraph.Graph, error)
 }
 
@@ -1397,6 +1406,10 @@ func (obj *StmtResField) Unify(kind string) ([]interfaces.Invariant, error) {
 	return invariants, nil
 }
 
+func (obj *StmtResField) TimeCheck() error {
+	panic("TODO")
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -1631,6 +1644,10 @@ func (obj *StmtResEdge) Unify(kind string) ([]interfaces.Invariant, error) {
 	}
 
 	return invariants, nil
+}
+
+func (obj *StmtResEdge) TimeCheck() error {
+	return nil
 }
 
 // Graph returns the reactive function graph which is expressed by this node. It
@@ -1979,6 +1996,10 @@ func (obj *StmtResMeta) Unify(kind string) ([]interfaces.Invariant, error) {
 	return invariants, nil
 }
 
+func (obj *StmtResMeta) TimeCheck() error {
+	return nil
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -2238,6 +2259,10 @@ func (obj *StmtEdge) Unify() ([]interfaces.Invariant, error) {
 	return invariants, nil
 }
 
+func (obj *StmtEdge) TimeCheck() error {
+	return nil
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -2481,6 +2506,10 @@ func (obj *StmtEdgeHalf) Unify() ([]interfaces.Invariant, error) {
 	invariants = append(invariants, invar)
 
 	return invariants, nil
+}
+
+func (obj *StmtEdgeHalf) TimeCheck() error {
+	return nil
 }
 
 // Graph returns the reactive function graph which is expressed by this node. It
@@ -2783,6 +2812,10 @@ func (obj *StmtIf) Unify() ([]interfaces.Invariant, error) {
 	}
 
 	return invariants, nil
+}
+
+func (obj *StmtIf) TimeCheck() error {
+	panic("TODO")
 }
 
 // Graph returns the reactive function graph which is expressed by this node. It
@@ -4071,6 +4104,10 @@ func (obj *StmtProg) Unify() ([]interfaces.Invariant, error) {
 	return invariants, nil
 }
 
+func (obj *StmtProg) TimeCheck() error {
+	panic("TODO")
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -4327,6 +4364,10 @@ func (obj *StmtFunc) Unify() ([]interfaces.Invariant, error) {
 	return []interfaces.Invariant{}, nil
 }
 
+func (obj *StmtFunc) TimeCheck() error {
+	return nil
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -4506,6 +4547,10 @@ func (obj *StmtClass) Unify() ([]interfaces.Invariant, error) {
 
 	// TODO: do we need to add anything else here because of the obj.Args ?
 	return obj.Body.Unify()
+}
+
+func (obj *StmtClass) TimeCheck() error {
+	panic("TODO")
 }
 
 // Graph returns the reactive function graph which is expressed by this node. It
@@ -4871,6 +4916,10 @@ func (obj *StmtInclude) Unify() ([]interfaces.Invariant, error) {
 	return invariants, nil
 }
 
+func (obj *StmtInclude) TimeCheck() error {
+	panic("TODO")
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -4984,6 +5033,10 @@ func (obj *StmtImport) Unify() ([]interfaces.Invariant, error) {
 	return []interfaces.Invariant{}, nil
 }
 
+func (obj *StmtImport) TimeCheck() error {
+	panic("TODO")
+}
+
 // Graph returns the reactive function graph which is expressed by this node. It
 // includes any vertices produced by this node, and the appropriate edges to any
 // vertices that are produced by its children. Nodes which fulfill the Expr
@@ -5068,6 +5121,10 @@ func (obj *StmtComment) SetScope(*interfaces.Scope) error { return nil }
 // collection to the caller.
 func (obj *StmtComment) Unify() ([]interfaces.Invariant, error) {
 	return []interfaces.Invariant{}, nil
+}
+
+func (obj *StmtComment) TimeCheck() error {
+	return nil
 }
 
 // Graph returns the reactive function graph which is expressed by this node. It
