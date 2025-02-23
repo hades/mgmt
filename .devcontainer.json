@@ -1,0 +1,15 @@
+{
+  "name": "Mgmt",
+  "build": {
+    "dockerfile": "docker/Dockerfile.development",
+    "context": "${localWorkspaceFolder}"
+  },
+  "remoteUser": "mgmt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go"
+      ]
+    }
+  }
+}
