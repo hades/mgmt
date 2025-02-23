@@ -1,5 +1,9 @@
 #!/bin/bash
 # setup a simple golang environment
+
+set -x
+set -e
+
 XPWD=`pwd`
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"	# dir!
 cd "${ROOT}" >/dev/null
@@ -9,12 +13,12 @@ cd "${ROOT}" >/dev/null
 sudo_command=$(command -v sudo)
 
 GO=`command -v go 2>/dev/null`
-YUM=`command -v yum 2>/dev/null`
-DNF=`command -v dnf 2>/dev/null`
-APT=`command -v apt-get 2>/dev/null`
-NEWAPT=`command -v apt 2>/dev/null`
-BREW=`command -v brew 2>/dev/null`
-PACMAN=`command -v pacman 2>/dev/null`
+YUM=`command -v yum 2>/dev/null || true`
+DNF=`command -v dnf 2>/dev/null || true`
+APT=`command -v apt-get 2>/dev/null || true`
+NEWAPT=`command -v apt 2>/dev/null || true`
+BREW=`command -v brew 2>/dev/null || true`
+PACMAN=`command -v pacman 2>/dev/null || true`
 
 # set minimum golang version and installed golang version
 mingolangversion=20
