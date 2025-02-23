@@ -6,7 +6,7 @@ MAINTAINER Michał Czeraszkiewicz <contact@czerasz.com>
 # Read more here: http://czerasz.com/2014/11/13/docker-tip-and-tricks/#use-refreshedat-variable-for-better-cache-control
 ENV REFRESHED_AT 2019-02-06
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends sudo && rm -rf /var/lib/apt/lists/*
 
 # Setup User to match Host User
 # Give the nre user superuser permissions
@@ -18,6 +18,8 @@ RUN groupadd --gid $GROUP_ID $GROUP_NAME && \
 	useradd --create-home --home /home/$USER_NAME --uid ${USER_ID} --gid $GROUP_NAME --groups sudo $USER_NAME && \
 	echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# Change user
+USER ${USER_NAME}
 # Copy all the files to the working directory
 COPY . /home/$USER_NAME/mgmt
 
@@ -26,6 +28,3 @@ WORKDIR /home/$USER_NAME/mgmt
 
 # Install dependencies
 RUN make deps
-
-# Change user
-USER ${USER_NAME}
